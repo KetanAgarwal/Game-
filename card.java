@@ -28,11 +28,12 @@ public class card
 			   playerTwoCards.add(someFighter);
 		      }index++;
 		   }  
-		  
+		    
 		   //Working of Game
 		   do
-		   {
-			  int lastIndex=playerOneCards.size()-1; 
+		   { 
+			   int lastIndex=playerOneCards.size()-1;
+			   int secIndex=playerTwoCards.size()-1;
 		      //Displaying the Card to the player
 			  Collections.shuffle(playerOneCards);
 			  Collections.shuffle(playerTwoCards);
@@ -42,17 +43,17 @@ public class card
 		      @SuppressWarnings("resource")
 			  Scanner playerChoice =new Scanner(System.in);
 		      String choice=playerChoice.nextLine();
-		      System.out.println(playerTwoCards.get(lastIndex));
+		      System.out.println(playerTwoCards.get(secIndex));
 		   
 		      //Condition statements showing what will happen according to the choice of the player
         	   switch (choice)
            {
              case "1":  //When the player wants to play with Rank
-             if(playerOneCards.get(lastIndex).rank<playerTwoCards.get(lastIndex).rank)
+             if(playerOneCards.get(lastIndex).rank<playerTwoCards.get(secIndex).rank)
              {  //If player wins
                 System.out.println("\nYour character's Rank is lower than your opponents hence you WIN");
-                playerOneCards.add(playerTwoCards.get(lastIndex));
-                playerTwoCards.remove(lastIndex);
+                playerOneCards.add(playerTwoCards.get(secIndex));
+                playerTwoCards.remove(secIndex);
              }
              else 
              {	//If player loses 
@@ -62,11 +63,11 @@ public class card
              }break;
              
              case "2":   //When the player wants to play with Punch Power
-             if(playerOneCards.get(lastIndex).punchPower>playerTwoCards.get(lastIndex).punchPower)
+             if(playerOneCards.get(lastIndex).punchPower>playerTwoCards.get(secIndex).punchPower)
              {  //If player wins
             	System.out.println("\nYour character's Punch Power is greater than your opponents hence you WIN");
-            	playerOneCards.add(playerTwoCards.get(lastIndex));
-            	playerTwoCards.remove(lastIndex);
+            	playerOneCards.add(playerTwoCards.get(secIndex));
+            	playerTwoCards.remove(secIndex);
              }
              else 
              {  //If player loses
@@ -78,11 +79,11 @@ public class card
              break;
              
              case "3":  // When the player wants to play with Kick Power
-             if(playerOneCards.get(lastIndex).kickPower>playerTwoCards.get(lastIndex).kickPower)
+             if(playerOneCards.get(lastIndex).kickPower>playerTwoCards.get(secIndex).kickPower)
              {  //If player wins
                 System.out.println("\nYour character's Kick Power is greater than your opponents hence you WIN");
-                playerOneCards.add(playerTwoCards.get(lastIndex));
-                playerTwoCards.remove(lastIndex);
+                playerOneCards.add(playerTwoCards.get(secIndex));
+                playerTwoCards.remove(secIndex);
              }
              else
              {  //If player loses
@@ -93,11 +94,11 @@ public class card
              break;
              
              case "4":   //When the player wants to play with Special Ability
-             if(playerOneCards.get(lastIndex).specialAbilityPower>playerTwoCards.get(lastIndex).specialAbilityPower)
+             if(playerOneCards.get(lastIndex).specialAbilityPower>playerTwoCards.get(secIndex).specialAbilityPower)
              {  //If player wins
             	System.out.println("\nYour character's Special Ability Power is greater than your opponents hence you WIN");
-            	playerOneCards.add(playerTwoCards.get(lastIndex));
-            	playerTwoCards.remove(lastIndex);
+            	playerOneCards.add(playerTwoCards.get(secIndex));
+            	playerTwoCards.remove(secIndex);
              }
              else  
              {  //If player loses
@@ -105,10 +106,18 @@ public class card
             	playerTwoCards.add(playerOneCards.get(lastIndex));
             	playerOneCards.remove(lastIndex);
              } 
+             break;
              
              default:System.out.println("You can choose only four options.");
            }//Process continues until one of the player's number of cards reduces to zero
-         }while (playerOneCards.size()!=0 && playerTwoCards.size()!=0);	   
+         }while (playerOneCards.size()!=0 && playerTwoCards.size()!=0);	  
+		   if(playerOneCards.size()==0)
+		   {
+			   System.out.println("You have zero cards left hence you LOSE");
+		   }else
+		   {
+			   System.out.println("Your opponent have zero cards left hence you WIN");
+		   }
 	}
    
 }
